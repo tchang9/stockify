@@ -11,6 +11,7 @@ const Welcome = (props) => {
 
     return(
         <>
+            <h1>Stockify!!</h1>
             <button onClick={handleClick}>Login</button>
             <button onClick={handleClick}>Register</button>
         </>
