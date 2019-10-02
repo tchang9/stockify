@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 
 class Login extends React.Component {
 
@@ -23,7 +24,7 @@ class Login extends React.Component {
             if (res.message) {
                 console.log(res.message)
             } else {
-                console.log("hellooooo")
+                return this.props.history.push(`/portfolio`)
             }
         })
     }
@@ -58,4 +59,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default (withRouter(Login))
