@@ -23,17 +23,24 @@ class Portfolio extends React.Component {
         })
         .then( res => res.json())
         .then( res => {
-            this.setState({
-                userStocks: {...res.transactions},
-                balance: res.balance
-            })
+            if (res.message) {
+                console.log(res.message)
+            } else {
+                this.setState({
+                    userStocks: {...res.transactions},
+                    balance: res.balance
+                })
+            }
         })
     }
 
     renderStocks = () => {
         return Object.keys(this.state.userStocks).map(ticker => {
+            // debugger
+            const quantity = this.state.userStocks[ticker].quantity
+            const price = parseFloat(this.state.userStocks[ticker].price).toFixed(2)
             return (
-                <div key={ v4() }>{ticker} - {this.state.userStocks[ticker].quantity}</div>
+                <div key={ v4() }>{ticker} - {quantity} Shares          {(price * quantity).toFixed(2)}</div>
             )
         })
     }
@@ -41,9 +48,9 @@ class Portfolio extends React.Component {
     renderTotalStocks = () => {
         let total = 0
         for (const ticker in this.state.userStocks) {
-            total += this.state.userStocks[ticker].quantity * this.state.userStocks[ticker].price
+            total += this.state.userStocks[ticker].quantity * parseFloat(this.state.userStocks[ticker].price).toFixed(2)
         }
-        return total
+        return total.toFixed(2)
     }
 
     handleChange = (e) => {
@@ -83,6 +90,7 @@ class Portfolio extends React.Component {
     }
 
     render() {
+        console.log(this.state.userStocks)
         return (
             <>
                 <h1>Portfolio {this.renderTotalStocks()}</h1>
