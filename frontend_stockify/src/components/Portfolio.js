@@ -1,5 +1,6 @@
 import React from 'react'
 import v4 from 'uuid'
+import Nav from './Nav'
 
 class Portfolio extends React.Component {
 
@@ -25,7 +26,6 @@ class Portfolio extends React.Component {
         .then( res => res.json())
         .then( res => {
             if (res.message) {
-                console.log(res.message)
                 this.setState({
                     message: res.message
                 })
@@ -40,7 +40,6 @@ class Portfolio extends React.Component {
 
     renderStocks = () => {
         return Object.keys(this.state.userStocks).map(ticker => {
-            // debugger
             const quantity = this.state.userStocks[ticker].quantity
             const price = parseFloat(this.state.userStocks[ticker].price).toFixed(2)
             return (
@@ -76,12 +75,10 @@ class Portfolio extends React.Component {
         .then( res => res.json())
         .then( res => {
             if (res.message) {
-                console.log(res.message)
                 this.setState({
                     message: res.message
                 })
             } else {
-                console.log(res)
                 let newStockTotal = res.quantity
                 if (this.state.userStocks[res.stock_ticker]) {
                     newStockTotal += this.state.userStocks[res.stock_ticker].quantity
@@ -101,9 +98,9 @@ class Portfolio extends React.Component {
     }
 
     render() {
-        console.log(this.state.userStocks)
         return (
             <>
+                <Nav />
                 {this.state.message
                 ?
                 <div>{this.state.message}</div>

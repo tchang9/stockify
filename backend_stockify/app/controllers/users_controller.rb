@@ -60,7 +60,12 @@ class UsersController < ApplicationController
                 render :json => transaction
             end
         end
-        
+    end
 
+    def transactions
+        user = curr_user
+        transactions = user.transactions
+
+        render :json => transactions
     end
 end
