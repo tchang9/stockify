@@ -25,10 +25,10 @@ class Transactions extends React.Component {
     renderTransactions = () => {
         return this.state.transactions.map(t => {
             
-            return <div key = { v4() }>{t.action.toUpperCase()} ({t.stock_ticker})  {t.quantity} Shares @ {t.price}</div>
+            return <div key = { v4() }>{t.action.toUpperCase()} ({t.stock_ticker})  {t.quantity} Shares @ ${t.price}</div>
         })
     }
-    
+
     render() {
         return(
             <>
