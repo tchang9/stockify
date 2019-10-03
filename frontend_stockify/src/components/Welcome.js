@@ -6,7 +6,6 @@ const Welcome = (props) => {
     const handleClick = (e) => {
         const page = e.target.innerText.toLowerCase()
         return props.history.push(`/${page}`)
-
     }
 
     return(
