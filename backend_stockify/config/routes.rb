@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   post '/userstocks', to: 'users#user_stocks' 
   post '/buy', to: 'users#buy' 
   get '/transactions', to: 'users#transactions'
+  post '/register', to: 'users#create'
 end

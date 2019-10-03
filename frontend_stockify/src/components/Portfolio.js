@@ -64,6 +64,9 @@ class Portfolio extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.setState({
+            message:""
+        })
         fetch(`http://localhost:3000/buy`, {
             method: "POST", 
             body: JSON.stringify(this.state.buy),
