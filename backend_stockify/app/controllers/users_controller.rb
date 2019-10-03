@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
     def buy
         user = curr_user
-        ticker = params[:ticker]
+        ticker = params[:ticker].upcase
         quantity = params[:quantity].to_i
         stock_info = getStock(ticker)
 

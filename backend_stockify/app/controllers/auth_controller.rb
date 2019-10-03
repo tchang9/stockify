@@ -5,7 +5,7 @@ class AuthController < ApplicationController
         if user.password_digest == params[:password]
             render json: {user: user}
         else
-            render json: {message: "Invalid username or password"}
+            render json: {errors: "Invalid username or password"}
         end
     end
 end

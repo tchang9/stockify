@@ -20,3 +20,48 @@
 .App-link {
   color: #09d3ac;
 }
+
+.welcome{
+  display:flex;
+  align-items:center;
+  flex-direction: column;
+}
+
+.login{
+  display:flex;
+  align-items: center;
+  flex-direction:column;
+}
+
+.nav{
+  display:flex;
+  justify-content: flex-end
+}
+
+.portfolio{
+  display:flex;
+  align-items:center;
+}
+
+.transactions{
+  display:flex;
+  align-items: center;
+  flex-direction:column;
+}
+.buyStock{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+}
+
+.error{
+  text-align: center;
+  color: red;
+}
+
+.register{
+  display:flex;
+  align-items: center;
+  flex-direction:column;
+}

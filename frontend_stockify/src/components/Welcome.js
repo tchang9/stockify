@@ -9,11 +9,13 @@ const Welcome = (props) => {
     }
 
     return(
-        <>
+        <div className="welcome">
             <h1>Stockify!!</h1>
-            <button onClick={handleClick}>Login</button>
-            <button onClick={handleClick}>Register</button>
-        </>
+            <div>
+                <button onClick={handleClick}>Login</button>
+                <button onClick={handleClick}>Register</button>
+            </div>
+        </div>
     )
 }
 

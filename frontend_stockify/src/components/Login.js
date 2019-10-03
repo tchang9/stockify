@@ -7,7 +7,8 @@ class Login extends React.Component {
         form: {
             email: "",
             password: ""
-        }
+        },
+        errors: ""
     }
 
     handleSubmit = (e) => {
@@ -21,8 +22,10 @@ class Login extends React.Component {
         })
         .then( res => res.json())
         .then(res => {
-            if (res.message) {
-                console.log(res.message)
+            if (res.errors) {
+                this.setState({
+                    errors: [...res.errors]
+                })
             } else {
                 localStorage.setItem("token", res.user.id)
                 return this.props.history.push(`/portfolio`)
@@ -39,22 +42,25 @@ class Login extends React.Component {
     render() {
         return(
             <>
-                <h1>Login</h1>
-                <form>
-                    Email:
-                    <input
-                        name="email" 
-                        type="text" 
-                        value={this.state.form.email}
-                        onChange={this.handleChange}/>
-                    Password:
-                    <input
-                        name="password"
-                        type="password" 
-                        value={this.state.form.password}
-                        onChange={this.handleChange}/>
-                    <button type="submit" onClick={this.handleSubmit}>Login </button>
-                </form>
+                <div className="login">
+                    <h1>Login</h1>
+                    {this.state.errors ? <font color="red">{this.state.errors}</font> : null} 
+                    <form>
+                        Email:
+                        <input
+                            name="email" 
+                            type="text" 
+                            value={this.state.form.email}
+                            onChange={this.handleChange}/>
+                        Password:
+                        <input
+                            name="password"
+                            type="password" 
+                            value={this.state.form.password}
+                            onChange={this.handleChange}/>
+                        <button type="submit" onClick={this.handleSubmit}>Login </button>
+                    </form>
+                </div>
             </>
         )
     }

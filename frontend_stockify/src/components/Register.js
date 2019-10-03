@@ -50,35 +50,39 @@ class Register extends React.Component {
     render() {
         return(
             <>
+                <div className="error">
                 {this.state.errors ? this.renderErrors() : null}
-                <h1>Register</h1>
-                <form>
-                    First Name:
-                    <input
-                        name="firstName" 
-                        type="text" 
-                        value={this.state.form.firstName}
-                        onChange={this.handleChange}/>
-                    Last Name:
-                    <input
-                        name="lastName" 
-                        type="text" 
-                        value={this.state.form.lastName}
-                        onChange={this.handleChange}/>
-                    Email:
-                    <input
-                        name="email" 
-                        type="text" 
-                        value={this.state.form.email}
-                        onChange={this.handleChange}/>
-                    Password:
-                    <input
-                        name="password"
-                        type="password" 
-                        value={this.state.form.password}
-                        onChange={this.handleChange}/>
-                    <button type="submit" onClick={this.handleSubmit}>Login </button>
-                </form>
+                </div>
+                <div className="register">
+                    <h1>Register</h1>
+                    <form>
+                        First Name:
+                        <input
+                            name="firstName" 
+                            type="text" 
+                            value={this.state.form.firstName}
+                            onChange={this.handleChange}/>
+                        Last Name:
+                        <input
+                            name="lastName" 
+                            type="text" 
+                            value={this.state.form.lastName}
+                            onChange={this.handleChange}/>
+                        Email:
+                        <input
+                            name="email" 
+                            type="text" 
+                            value={this.state.form.email}
+                            onChange={this.handleChange}/>
+                        Password:
+                        <input
+                            name="password"
+                            type="password" 
+                            value={this.state.form.password}
+                            onChange={this.handleChange}/>
+                        <button type="submit" onClick={this.handleSubmit}>Login </button>
+                    </form>
+                </div>
             </>
         )
     }

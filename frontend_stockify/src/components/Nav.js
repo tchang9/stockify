@@ -13,13 +13,13 @@ const Nav = (props) => {
     }
 
     return (
-        <>
-            <div onClick={handleClick}>
-                Portfolio
-            </div>
-            <div onClick={handleClick}>Transactions</div>
+        <div className="nav">
+            <button onClick={handleClick}>Portfolio</button>
+
+            <button onClick={handleClick}>Transactions</button>
+
             <button onClick={logout}>Logout</button>
-        </>
+        </div>
     )
 }
 

@@ -5,7 +5,7 @@ import Nav from './Nav'
 class Portfolio extends React.Component {
 
     state = {
-        balance: 0,
+        balance: null,
         userStocks: {},
         buy: {
             ticker: "",
@@ -32,7 +32,7 @@ class Portfolio extends React.Component {
             } else {
                 this.setState({
                     userStocks: {...res.transactions},
-                    balance: res.balance
+                    balance: res.balance.toFixed(2)
                 })
             }
         })
@@ -52,7 +52,7 @@ class Portfolio extends React.Component {
 
             return (
 
-                <div key={ v4() }><font color={color}>{ticker}</font> - {quantity} Shares          {(price * quantity).toFixed(2)}</div>
+                <div key={ v4() }><font color={color}>{ticker}</font> - {quantity} Shares ${(price * quantity).toFixed(2)}</div>
             )
         })
     }
@@ -91,7 +91,6 @@ class Portfolio extends React.Component {
                     message: res.message
                 })
             } else {
-                console.log(res)
                 let newStockTotal = res.quantity
                 if (this.state.userStocks[res.stock_ticker]) {
                     newStockTotal += this.state.userStocks[res.stock_ticker].quantity
@@ -112,35 +111,42 @@ class Portfolio extends React.Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <>
                 <Nav />
                 {this.state.message
                 ?
-                <div>{this.state.message}</div>
+                <div className="error">{this.state.message}</div>
                 :
                 null
-                }  
-                <h1>Portfolio {this.renderTotalStocks()}</h1>
-                <div>{this.renderStocks()}</div>
-                <h2>Balance - {this.state.balance}</h2>
-                <form>
-                    Stock Ticker
-                    <input
-                        name="ticker" 
-                        type="text" 
-                        value={this.state.buy.ticker}
-                        onChange={this.handleChange}/>
-                    Quantity:
-                    <input
-                        name="quantity"
-                        type="number" 
-                        min="1"
-                        value={this.state.buy.quantity}
-                        onChange={this.handleChange}/>
-                    <button type="submit" onClick={this.handleSubmit}>Buy Stocks</button>
-                </form>
+                }
+                {this.state.balance === null && this.state.message === "" ? "Fetching Data.." :
+                    <div className="portfolio">
+                        <div>   
+                            <h1>Portfolio (${this.renderTotalStocks()})</h1>
+                            <div>{this.renderStocks()}</div>
+                        </div>
+                        <div className="buyStock">
+                            <h2>Balance - ${this.state.balance}</h2>
+                            <form>
+                                Stock Ticker: 
+                                <input
+                                    name="ticker" 
+                                    type="text" 
+                                    value={this.state.buy.ticker}
+                                    onChange={this.handleChange}/>
+                                Quantity:
+                                <input
+                                    name="quantity"
+                                    type="number" 
+                                    min="1"
+                                    value={this.state.buy.quantity}
+                                    onChange={this.handleChange}/>
+                                <button type="submit" onClick={this.handleSubmit}>Buy Stocks</button>
+                            </form>
+                        </div>
+                    </div>
+                }
             </>
         )
     }
