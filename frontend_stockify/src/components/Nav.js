@@ -15,9 +15,7 @@ const Nav = (props) => {
     return (
         <div className="nav">
             <button onClick={handleClick}>Portfolio</button>
-
             <button onClick={handleClick}>Transactions</button>
-
             <button onClick={logout}>Logout</button>
         </div>
     )

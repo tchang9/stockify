@@ -2,10 +2,10 @@ class AuthController < ApplicationController
     def login
         user = User.find_by(email: params[:email])
   
-        if user.password_digest == params[:password]
+        if user and user.password_digest == params[:password]
             render json: {user: user}
         else
-            render json: {errors: "Invalid username or password"}
+            render json: {errors: "Invalid email or password"}
         end
     end
 end

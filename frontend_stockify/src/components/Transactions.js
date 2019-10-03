@@ -28,6 +28,7 @@ class Transactions extends React.Component {
             return <div key = { v4() }>{t.action.toUpperCase()} ({t.stock_ticker})  {t.quantity} Shares @ {t.price}</div>
         })
     }
+    
     render() {
         return(
             <>
