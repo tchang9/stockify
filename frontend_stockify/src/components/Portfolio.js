@@ -4,6 +4,7 @@ import v4 from 'uuid'
 class Portfolio extends React.Component {
 
     state = {
+        balance: 0,
         userStocks: {},
         buy: {
             ticker: "",
@@ -23,7 +24,8 @@ class Portfolio extends React.Component {
         .then( res => res.json())
         .then( res => {
             this.setState({
-                userStocks: {...res}
+                userStocks: {...res.transactions},
+                balance: res.balance
             })
         })
     }
@@ -65,6 +67,7 @@ class Portfolio extends React.Component {
             if (res.message) {
                 console.log(res.message)
             } else {
+                console.log(res)
                 const newStockTotal = this.state.userStocks[res.stock_ticker].quantity + res.quantity
                 this.setState({
                     userStocks: {...this.state.userStocks,
@@ -72,18 +75,19 @@ class Portfolio extends React.Component {
                             ...this.state.userStocks[res.stock_ticker],
                                 quantity: newStockTotal
                         }
-                    }
+                    },
+                    balance: res.user.balance
                 })
             }
         })
     }
 
     render() {
-        console.log(this.state)
         return (
             <>
                 <h1>Portfolio {this.renderTotalStocks()}</h1>
                 <div>{this.renderStocks()}</div>
+                <h2>Balance - {this.state.balance}</h2>
                 <form>
                     Stock Ticker
                     <input

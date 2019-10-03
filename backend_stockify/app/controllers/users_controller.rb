@@ -15,7 +15,9 @@ class UsersController < ApplicationController
         user_transactions.each_key do |key|
             user_transactions[key][:price] = getStock(key)["Global Quote"]["05. price"]
         end
-        render :json => user_transactions
+
+        user_info = {balance: user.balance, transactions: user_transactions}
+        render :json => user_info
     end
 
     def buy
@@ -31,9 +33,15 @@ class UsersController < ApplicationController
             stock.open_price = open_price
         end
 
-        transaction = Transaction.create(action:"buy", quantity: quantity, price: price, user_id: user.id, stock_id: stock.id)
+        cost = price.to_f * quantity.to_f
+        if cost > user.balance
+            render json: {message: "Not Enough Funds"}
+        else
+            transaction = Transaction.create(action:"buy", quantity: quantity, price: price, user_id: user.id, stock_id: stock.id)
 
-        render :json => transaction
+            user.update(balance: user.balance-cost)
 
+            render :json => transaction
+        end
     end
 end
