@@ -9,7 +9,8 @@ class Portfolio extends React.Component {
         buy: {
             ticker: "",
             quantity: 0
-        }
+        },
+        message: ""
     }
 
     componentDidMount() {
@@ -25,6 +26,9 @@ class Portfolio extends React.Component {
         .then( res => {
             if (res.message) {
                 console.log(res.message)
+                this.setState({
+                    message: res.message
+                })
             } else {
                 this.setState({
                     userStocks: {...res.transactions},
@@ -73,14 +77,21 @@ class Portfolio extends React.Component {
         .then( res => {
             if (res.message) {
                 console.log(res.message)
+                this.setState({
+                    message: res.message
+                })
             } else {
                 console.log(res)
-                const newStockTotal = this.state.userStocks[res.stock_ticker].quantity + res.quantity
+                let newStockTotal = res.quantity
+                if (this.state.userStocks[res.stock_ticker]) {
+                    newStockTotal += this.state.userStocks[res.stock_ticker].quantity
+                }
                 this.setState({
                     userStocks: {...this.state.userStocks,
                         [res.stock_ticker]: {
                             ...this.state.userStocks[res.stock_ticker],
-                                quantity: newStockTotal
+                                quantity: newStockTotal,
+                                price: res.price
                         }
                     },
                     balance: res.user.balance
@@ -93,6 +104,12 @@ class Portfolio extends React.Component {
         console.log(this.state.userStocks)
         return (
             <>
+                {this.state.message
+                ?
+                <div>{this.state.message}</div>
+                :
+                null
+                }  
                 <h1>Portfolio {this.renderTotalStocks()}</h1>
                 <div>{this.renderStocks()}</div>
                 <h2>Balance - {this.state.balance}</h2>
