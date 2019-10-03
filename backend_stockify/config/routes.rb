@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   post '/login', to: 'auth#login'
   post '/userstocks', to: 'users#user_stocks' 
+  post '/buy', to: 'users#buy' 
 end

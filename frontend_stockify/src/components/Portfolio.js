@@ -49,9 +49,35 @@ class Portfolio extends React.Component {
         })
     }
 
-    // handleSubmit = () => {
-    //     fetch()
-    // }
+    handleSubmit = (e) => {
+        e.preventDefault()
+        fetch(`http://localhost:3000/buy`, {
+            method: "POST", 
+            body: JSON.stringify(this.state.buy),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then( res => res.json())
+        .then(res => {
+            if (res.message) {
+                console.log(res.message)
+            } else {
+                // return this.props.history.push(`/portfolio`)
+                console.log(res)
+                // debugger
+                const newStockTotal = this.state.userStocks[res.stock_ticker].quantity + res.quantity
+                this.setState({
+                    userStocks: {...this.state.userStocks,
+                        [res.stock_ticker]: {
+                            ...this.state.userStocks[res.stock_ticker],
+                                quantity: newStockTotal
+                        }
+                    }
+                })
+            }
+        })
+    }
 
     render() {
         console.log(this.state)
