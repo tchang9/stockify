@@ -1,0 +1,5 @@
+To run the project, clone the project.
+In your terminal, navigate to the directory backend-stockify.
+Run the command "rails s"
+In another terminal window, navigate to the directory frontend_stockify.
+Run the command "npm start"
