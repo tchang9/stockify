@@ -29,7 +29,6 @@ class Transactions extends React.Component {
         })
     }
     render() {
-        console.log(this.state)
         return(
             <>
                 <Nav />

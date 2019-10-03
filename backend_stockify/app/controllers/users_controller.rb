@@ -21,6 +21,7 @@ class UsersController < ApplicationController
                 break
             else
                 user_transactions[key][:price] = stock_info["Global Quote"]["05. price"].to_f
+                user_transactions[key][:open_price] = stock_info["Global Quote"]["02. open"].to_f
             end
         end
 

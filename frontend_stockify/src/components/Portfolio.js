@@ -42,8 +42,17 @@ class Portfolio extends React.Component {
         return Object.keys(this.state.userStocks).map(ticker => {
             const quantity = this.state.userStocks[ticker].quantity
             const price = parseFloat(this.state.userStocks[ticker].price).toFixed(2)
+            const openPrice = parseFloat(this.state.userStocks[ticker].open_price).toFixed(2)
+            let color = "gray"
+                if (price < openPrice) {
+                    color = "red"
+                } else if (price > openPrice) {
+                    color = "green"
+                }
+
             return (
-                <div key={ v4() }>{ticker} - {quantity} Shares          {(price * quantity).toFixed(2)}</div>
+
+                <div key={ v4() }><font color={color}>{ticker}</font> - {quantity} Shares          {(price * quantity).toFixed(2)}</div>
             )
         })
     }
@@ -82,6 +91,7 @@ class Portfolio extends React.Component {
                     message: res.message
                 })
             } else {
+                console.log(res)
                 let newStockTotal = res.quantity
                 if (this.state.userStocks[res.stock_ticker]) {
                     newStockTotal += this.state.userStocks[res.stock_ticker].quantity
@@ -91,7 +101,8 @@ class Portfolio extends React.Component {
                         [res.stock_ticker]: {
                             ...this.state.userStocks[res.stock_ticker],
                                 quantity: newStockTotal,
-                                price: res.price
+                                price: res.price,
+                                open_price: res.stock.open_price
                         }
                     },
                     balance: res.user.balance
@@ -101,6 +112,7 @@ class Portfolio extends React.Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <>
                 <Nav />
