@@ -12,9 +12,10 @@ class Portfolio extends React.Component {
     }
 
     componentDidMount() {
+        const userId = localStorage.getItem("token")
         fetch(`http://localhost:3000/userstocks`, {
             method: "POST", 
-            body: JSON.stringify({id:1}),
+            body: JSON.stringify({id:userId}),
             headers:{
                 'Content-Type': 'application/json'
             }
@@ -55,17 +56,15 @@ class Portfolio extends React.Component {
             method: "POST", 
             body: JSON.stringify(this.state.buy),
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": localStorage.getItem("token")
             }
         })
         .then( res => res.json())
-        .then(res => {
+        .then( res => {
             if (res.message) {
                 console.log(res.message)
             } else {
-                // return this.props.history.push(`/portfolio`)
-                console.log(res)
-                // debugger
                 const newStockTotal = this.state.userStocks[res.stock_ticker].quantity + res.quantity
                 this.setState({
                     userStocks: {...this.state.userStocks,

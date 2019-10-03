@@ -5,4 +5,12 @@ class ApplicationController < ActionController::API
         stock_info = Net::HTTP.get_response(stock_api_url).body
         return JSON.parse(stock_info)
     end
+
+    def get_token
+        request.headers["Authorization"]
+    end
+
+    def curr_user
+        User.find_by(id: get_token)
+    end
 end

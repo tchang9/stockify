@@ -19,8 +19,7 @@ class UsersController < ApplicationController
     end
 
     def buy
-        # GET THE USER 
-        user = User.find_by(id: 1)
+        user = curr_user
         ticker = params[:ticker]
         quantity = params[:quantity].to_i
         
@@ -38,7 +37,3 @@ class UsersController < ApplicationController
 
     end
 end
-
-# array.each do |item|
-#     puts "The current array item is: #{item}"
-#   end

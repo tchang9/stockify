@@ -24,6 +24,8 @@ class Login extends React.Component {
             if (res.message) {
                 console.log(res.message)
             } else {
+                debugger
+                localStorage.setItem("token", res.user.id)
                 return this.props.history.push(`/portfolio`)
             }
         })
