@@ -15,8 +15,7 @@ class Register extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://git.heroku.com/stockify-api.git
-        /register`, {
+        fetch(`https://stockify-api.herokuapp.com/register`, {
             method: "POST", 
             body: JSON.stringify(this.state.form),
             headers:{

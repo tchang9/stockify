@@ -16,8 +16,7 @@ class Portfolio extends React.Component {
 
     componentDidMount() {
         const userId = localStorage.getItem("token")
-        fetch(`https://git.heroku.com/stockify-api.git
-        /userstocks`, {
+        fetch(`https://stockify-api.herokuapp.com/userstocks`, {
             method: "POST", 
             body: JSON.stringify({id:userId}),
             headers:{
@@ -77,8 +76,7 @@ class Portfolio extends React.Component {
         this.setState({
             message:""
         })
-        fetch(`https://git.heroku.com/stockify-api.git
-        /buy`, {
+        fetch(`https://stockify-api.herokuapp.com/buy`, {
             method: "POST", 
             body: JSON.stringify(this.state.buy),
             headers:{
