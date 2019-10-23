@@ -8,7 +8,8 @@ class Transactions extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/transactions`, {
+        fetch(`https://git.heroku.com/stockify-api.git
+        /transactions`, {
             headers:{
                 'Content-Type': 'application/json',
                 "Authorization": localStorage.getItem("token")

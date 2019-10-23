@@ -13,7 +13,8 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/login`, {
+        fetch(`https://git.heroku.com/stockify-api.git
+        /login`, {
             method: "POST", 
             body: JSON.stringify(this.state.form),
             headers:{
